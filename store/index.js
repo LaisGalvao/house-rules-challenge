@@ -1,32 +1,21 @@
-new Vuex.Store({
-  state: () => ({
-    counter: 0
-  }),
-  mutations: {
-    increment(state) {
-      state.counter++
-    }
-  },
-  modules: {
-    todos: {
-      namespaced: true,
-      state: () => ({
-        list: []
-      }),
-      mutations: {
-        add(state, { text }) {
-          state.list.push({
-            text,
-            done: false
-          })
-        },
-        remove(state, { todo }) {
-          state.list.splice(state.list.indexOf(todo), 1)
-        },
-        toggle(state, { todo }) {
-          todo.done = !todo.done
-        }
-      }
-    }
-  }
+// holds your root state
+export const state = () => ({
+  counter: 0
 })
+
+// contains your actions
+export const actions = {
+  counterUp({ state, commit }) {
+    commit('setCounter', state.counter + 1)
+  }
+}
+// contains your mutations
+export const mutations = {
+  setCounter(state, value) {
+    state.counter = value
+  }
+}
+// your root getters
+export const getters = {
+  myGetter(state) { return state.counter + 1000 }
+}
