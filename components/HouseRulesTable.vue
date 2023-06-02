@@ -1,29 +1,19 @@
-<!-- Please remove this file from your project -->
 <template>
-  <div
-    class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center sm:pt-0"
-  >
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Descrição</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Conteúdo da tabela será adicionado dinamicamente aqui -->
-          <tr v-for="(rule, index) in rules" :key="index">
-            <td>{{ rule.name }}</td>
-            <td>{{ rule.description }}</td>
-            <td>
-              <!-- Botões de edição e exclusão serão adicionados aqui -->
-              <button class="btn-warning" @click="editRule(index)">Editar</button>
-              <button class="btn-danger" @click="deleteRule(index)">Excluir</button>
-            </td>
-          </tr>
-      </tbody>
-    </table>
+  <div class="container-fluid mt-5">
+    <b-table :items="rules" :fields="fields" dark class="container text-center">
+      <template #cell(name)="row">
+        {{ row.value }}
+      </template>
+      <template #cell(description)="row">
+        {{ row.value }}
+      </template>
+      <template #cell(actions)="row">
+        <div>
+          <button class="btn btn-warning" @click="editRule(row.item)">Edit</button>
+          <button class="btn btn-danger" @click="deleteRule(row.item)">Delete</button>
+        </div>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -34,22 +24,27 @@ export default {
     rules: {
       type: Array,
       required: true
+    },
+    fields: {
+      type: Array,
+      required: true
     }
   },
-  data() {
-    return {
-      editedRules: []
-    };
-  },
   methods: {
-    editRule(index) {
+    editRule(rule) {
       // Lógica para editar a regra
-      this.editedRules[index] = { ...this.rules[index] };
+      console.log('Editar regra:', rule);
     },
-    deleteRule(index) {
+    deleteRule(rule) {
       // Lógica para excluir a regra
-      this.editedRules.splice(index, 1);
+      console.log('Excluir regra:', rule);
     }
   }
 }
 </script>
+<style scoped>
+
+table{
+  border-radius: 15px;
+}
+</style>
