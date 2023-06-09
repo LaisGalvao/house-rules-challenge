@@ -14,7 +14,7 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick().then(this.fetchData)
+    this.fetchData();
   },
   methods: {
     async fetchData() {
@@ -28,6 +28,7 @@ export default {
         console.error(error)
       }
     },
+    
   },
 }
 </script>
